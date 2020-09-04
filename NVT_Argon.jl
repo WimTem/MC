@@ -76,8 +76,10 @@ end
 
 
 
-plot(result'[100:500,1:4], title="N=10, iter=1e4")
+plot(result'[1:end,3:4], title="N=10, iter=1e4")
 savefig("./argon.pdf")
+
+
 
 print(length(e))
 σ = 3.405e-10
