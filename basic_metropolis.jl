@@ -43,7 +43,7 @@ function move(particles, dt)
     #Metropolis Criterion
     if (U_new - U_old) < 0
         return particles_temp
-    elseif rand() < exp(-β*(U_new - U_old))
+    elseif rand() < exp(-0.5*(U_new - U_old))
         return particles_temp
     end
     return particles
@@ -76,6 +76,15 @@ scatter(particles[:,1], particles[:,2], label="Before")
 scatter!(particles2[:,1], particles2[:,2], label="After")
 savefig("./images/basic_particles.pdf")
 
-plot(energy[300:end], label="Last 50000 iterations")
+plot(energy[100:end])
 savefig("./images/basic_energy.pdf")
 
+particles3 = rand(16,2)*1e-3 + 0.5*ones(16,2)
+energy2, particles4 = run(particles, 0.005, 200000)
+
+scatter(particles3[:,1], particles3[:,2], label="Before", xlims=(0,1), ylims=(0,1))
+scatter!(particles4[:,1], particles4[:,2], label="After")
+savefig("./images/basic_particles2.pdf")
+
+plot(energy2[100:end])
+savefig("./images/basic_energy2.pdf")
